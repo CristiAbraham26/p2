@@ -2,7 +2,7 @@
 PROIECT DE SEMESTRU: ANALIZOR TEXT (OPTIUNEA C)
 Autor: Student
 Data: Ianuarie 2026
-Versiune: Cu Jurnalizare DETALIATA (Rezultate complete in raport)
+Versiune: Jurnalizare Detaliata + Resetare Automata la Start
 """
 
 import datetime
@@ -141,7 +141,6 @@ def statistici_de_baza():
 
     print(f"\n=== STATISTICI ===\n{rezultat}")
 
-    # Salvam exact acest rezultat in istoric
     log_actiune("STATISTICI GENERATE", rezultat)
 
 
@@ -179,7 +178,6 @@ def frecventa_cuvinte():
             j = j + 1
         i = i + 1
 
-    # Construim string-ul cu top 5
     rezultat = ""
     limit = 0
     while limit < len(lista_perechi) and limit < 5:
@@ -206,7 +204,6 @@ def histograma_lungimi():
             lungimi[l] = 1
         i = i + 1
 
-    # Construim histograma intr-un string
     rezultat = ""
     l = 1
     while l <= 15:
@@ -329,8 +326,6 @@ def cripteaza_text():
 
     print("\n=== TEXT CRIPTAT ===")
     print(secret)
-
-    # Salvam tot textul criptat in log
     log_actiune("CRIPTARE TEXT (Caesar +1)", secret)
 
 
@@ -360,12 +355,11 @@ def salvare_raport():
         f.write("\n\n")
         f.write("sectiunea 2: JURNAL COMPLET DE ACTIVITATE\n")
         f.write("---------------------------------------\n")
-        f.write("(Aici sunt incluse toate rezultatele obtinute in sesiune)\n\n")
 
         i = 0
         while i < len(istoric):
             f.write(istoric[i] + "\n")
-            f.write("-" * 30 + "\n")  # Separator intre actiuni
+            f.write("-" * 30 + "\n")
             i = i + 1
 
         f.close()
@@ -377,8 +371,26 @@ def salvare_raport():
 
 
 # ==========================================
-# MENIU
+# MENIU SI RESETARE
 # ==========================================
+
+def reset_fisier_raport():
+    """
+    Functie noua: Sterge continutul vechi din raport.txt
+    la fiecare pornire a programului.
+    """
+    try:
+        f = open("raport.txt", "w")
+        # Scriem doar un mesaj de sistem ca sa stim ca s-a resetat
+        # Acest mesaj va fi suprascris oricum cand dam Save la final,
+        # dar garanteaza ca datele vechi au fost sterse.
+        f.write("")
+        f.close()
+        print("[SYSTEM] Fisierul 'raport.txt' a fost curatat (resetat) pentru noua sesiune.")
+    except:
+        # Daca fisierul nu exista (prima rulare), nu facem nimic
+        pass
+
 
 def meniu_principal():
     global text_curent
@@ -430,4 +442,9 @@ def meniu_principal():
 
 
 if __name__ == "__main__":
+    # AICI ESTE SCHIMBAREA IMPORTANTA:
+    # 1. Resetam fisierul fizic de pe disc
+    reset_fisier_raport()
+
+    # 2. Pornim programul normal
     meniu_principal()
