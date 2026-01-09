@@ -1,7 +1,7 @@
 """
-PROIECT DE SEMESTRU: ANALIZOR TEXT (OPTIUNEA C)
-Autor: Student
-Data: Ianuarie 2026
+PROIECT PENTRU FINALUL DE SEMESTRU: ANALIZOR TEXT (OPTIUNEA C)
+Autor: ABRAHAM CRISTIAN RZAVAN
+Data:  09 Ianuarie 2026
 Versiune: Jurnalizare Detaliata + Resetare Automata la Start
 """
 
@@ -72,7 +72,7 @@ def incarca_text():
     print("\n=== INCARCARE TEXT ===")
     print("1. Introducere manuala (tastatura)")
     print("2. Incarca text demonstrativ")
-    print("3. Incarca din fisier")
+    print("3. Incarca din fisier") #Functionalitatea suplimentara 1
 
     optiune = input("Alege optiunea: ")
     mesaj_log = ""
@@ -239,6 +239,7 @@ def cauta_in_text():
 # FUNCTIONALITATI SUPLIMENTARE
 # ==========================================
 
+#Functionalitatea suplimentara 2
 def raport_vocale():
     global text_curent
     if len(text_curent) == 0:
@@ -273,7 +274,7 @@ def raport_vocale():
     print(f"\n=== RAPORT VOCALE ===\n{rezultat}")
     log_actiune("RAPORT VOCALE/CONSOANE", rezultat)
 
-
+#Functionalitatea suplimentara 3
 def gaseste_palindroame():
     global text_curent
     if len(text_curent) == 0:
@@ -313,7 +314,7 @@ def gaseste_palindroame():
     print(f"\n=== PALINDROAME GASITE ===\n{rezultat}")
     log_actiune("CAUTARE PALINDROAME", rezultat)
 
-
+#Functionalitatea suplimentara 4
 def cripteaza_text():
     global text_curent
     if len(text_curent) == 0:
@@ -340,7 +341,7 @@ def cripteaza_text():
     print(secret)
     log_actiune("CRIPTARE TEXT (Caesar +1)", secret)
 
-
+#Functionalitatea suplimentara 5
 def salvare_raport():
     global text_curent
     global istoric
@@ -386,6 +387,9 @@ def salvare_raport():
 # MENIU SI RESETARE
 # ==========================================
 
+# ==========================================
+#  RESETARE
+# ==========================================
 def reset_fisier_raport():
     """
     Functie noua: Sterge continutul vechi din raport.txt
@@ -403,7 +407,9 @@ def reset_fisier_raport():
         # Daca fisierul nu exista (prima rulare), nu facem nimic
         pass
 
-
+# ==========================================
+# MENIU PRINCIPAL
+# ==========================================
 def meniu_principal():
     global text_curent
     log_actiune("START APLICATIE", "Sesiune noua pornita.")
@@ -454,7 +460,7 @@ def meniu_principal():
 
 
 if __name__ == "__main__":
-    # AICI ESTE SCHIMBAREA IMPORTANTA:
+
     # 1. Resetam fisierul fizic de pe disc
     reset_fisier_raport()
 
