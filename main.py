@@ -244,6 +244,7 @@ def raport_vocale():
     if len(text_curent) == 0:
         print("\n[!] Lipsa text!")
         return
+
     voc = 0
     cons = 0
     v = "aeiouAEIOU"
@@ -257,7 +258,18 @@ def raport_vocale():
                 cons = cons + 1
         i = i + 1
 
-    rezultat = f"Numar Vocale: {voc}\nNumar Consoane: {cons}"
+    valoare_raport = 0.0
+    if cons > 0:
+        valoare_raport = voc / cons
+    else:
+        # Daca nu avem consoane, nu putem imparti la zero
+        valoare_raport = voc
+
+    rezultat = f"Numar Vocale: {voc}\n"
+    rezultat += f"Numar Consoane: {cons}\n"
+    # Adaugam calculul cu 2 zecimale
+    rezultat += f"Raport (Vocale / Consoane): {valoare_raport:.2f}"
+
     print(f"\n=== RAPORT VOCALE ===\n{rezultat}")
     log_actiune("RAPORT VOCALE/CONSOANE", rezultat)
 
